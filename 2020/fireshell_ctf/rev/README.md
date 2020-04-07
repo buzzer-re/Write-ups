@@ -1,7 +1,7 @@
-# Rev
+# Rev (500 Points)
 
 # Main porpuse
-Rev is a simple reverse enginner task, we need to undestand the cryptographic function and reverse it.
+Rev is a simple reverse enginner task, we need to undestand the cryptographic function and reverse it. 
 
 
 # Reversing
