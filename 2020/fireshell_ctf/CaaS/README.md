@@ -1,14 +1,14 @@
-# CaaS - Compile as a Service (100 points)
+# CaaS - Compiler as a Service (100 points)
 
 
 # Main porpuse
 
-Caas was a simple text editor with the button ```compile```, then the code is going to be sent to a server that will same the file and run ```gcc``` in it.
+Caas was a simple text editor with the button ```compile```, then the code is going to be sent to a server that will create a file and run ```gcc``` in it.
 
 
 # Solution
 
-It was no so difficult at all, i lose time trying to do some kind of RCE inside of it, but then i realized that i can try DoS the server with the ```#include``` (Sorry fireshell, i literally crash your server for a few minutes :D)
+It was no so difficult at all, i lose a lot of time trying to do some kind of RCE inside of it, but then i realized that i can try DoS the server with the ```#include``` (Sorry fireshell, i literally crash your server for a few minutes :D)
 
 
 ### Possible payloads
