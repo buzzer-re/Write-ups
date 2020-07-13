@@ -7,7 +7,7 @@ SAUNA it's a Windows machine that explore bad AD implementation and crackable pa
 
 ## Identification
 
-I really don't like to run ***nmap*** to every port, I have a couple of services that I like to check before run a dirty scan to all ports, they are:
+I really don't like to run ***nmap*** to every port, I have a couple of services that I like to check before running a dirty scan to all ports, they are:
 
 * FTP (21)
 * SSH (22)
@@ -61,9 +61,9 @@ Host script results:
 |_  start_date: N/A
 ```
 
-This also create a xml file that we can use to other porpuse like create an report or search for CVE's with [searchsploit](https://www.exploit-db.com/searchsploit), but this is not our case.
+This also create a xml file that we can use for other purpouses like creating an report or search for CVE's with [searchsploit](https://www.exploit-db.com/searchsploit), but this is not our case.
 
-We already know that this are serving an Web Page, but now we have more information provided by nmap:
+We already know that these are serving an Web Page, but now we have more information provided by nmap:
 
 * This server also host an entire AD service with LDAP, Kerberos and WinRM.
 * The domain name is EGOTISTICAL-BANK.LOCAL
@@ -78,7 +78,7 @@ kali@kali:~$ smbclient -L 10.10.10.175 -U'"%"'
 session setup failed: NT_STATUS_LOGON_FAILURE
 ```
 
-Running with user "%", the smb service already know that this is an Guest/Anonymous login, but this machine ***does not allows guest logins***. Sad for us, but my next and almost successful step was to look into AD itself using LDAP protocol.
+Running with user "%", the smb service already knows that this is an Guest/Anonymous login, but this machine ***does not allows guest logins***. Sad for us, but my next and almost successful step was to look into AD itself using LDAP protocol.
 
 ## Second shot: ldapsearch as guest [Half Success]
 
@@ -90,7 +90,7 @@ Simple lookup
 kali@kali:~$ ldapsearch -x -H "ldap://10.10.10.175:3268"
 ```
 
-Using ldapsearch we are able to run ldap queries, using ***-x*** flag means that we will use a simple authentication (aka ***Guest***), when you run this you will get the basic information about the AD itself, with that I found a name of a people inside the system
+Using ldapsearch we are able to run ldap queries, using ***-x*** flag means that we will use a simple authentication (aka ***Guest***), when you run this you will get the basic information about the AD itself, with that I found a name of a person inside the system:
 
 ```
 ...
@@ -111,7 +111,7 @@ So there is a user with the name Hugo Smith, the next step was to try possible u
 
 ## Get no pre-auth users (aka GetNPUsers)
 
-[Impacket](https://github.com/SecureAuthCorp/impacket) it's a great python module to work with Windows networking (SMB, Kerberos, MSRPC), and is very useful to use for find some flaws in AD configuration, a famous usage is the [GetNPUsers.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetNPUsers.py) script that they have in the examples folder, you can find a nice explaination of how this works [here](https://www.youtube.com/watch?v=pZSyGRjHNO4) but the basic idea here is to get the [TGT ticket](https://en.wikipedia.org/wiki/Ticket_Granting_Ticket) of a user that does not require a pre-authentication password in Kerberos service, in my research I realized that is ***not a real world scenario*** because sysadmin's probably will never check this box (There is no real reason for this). 
+[Impacket](https://github.com/SecureAuthCorp/impacket) it's a great python module to work with Windows networking (SMB, Kerberos, MSRPC), and is very useful to use for find some flaws in AD configuration, a famous usage is the [GetNPUsers.py](https://github.com/SecureAuthCorp/impacket/blob/master/examples/GetNPUsers.py) script that they have in the examples folder, you can find a nice explaination of how this works [here](https://www.youtube.com/watch?v=pZSyGRjHNO4) but the basic idea here is to get the [TGT ticket](https://en.wikipedia.org/wiki/Ticket_Granting_Ticket) of a user that does not require a pre-authentication password in Kerberos service, in my research I realized that is ***not a real world scenario*** because sysadmins will probably never check this box (There is no real reason for this). 
 
 So we can use this script to get the TGT ticket for our Hugo Smith user and also check if this user really exist (because the script will need to query the Kerberos service to get the user information) and if successfull, we can let john or hashcat crack this ticket by bruteforce.
 
@@ -169,7 +169,7 @@ So here is, fsmith password is ***Thestrokes23***
 
 ## First shell from WinRM
 
-In the nmap scan, I notice that ***Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)*** service was running in the ***Windows Remote Management*** port, this Windows service allows to run commands inside a server, for management porpuse, not all users have access to that, but as this is a CTF, maybe our user has! For this exploration I will use [evil-winrm](https://github.com/Hackplayers/evil-winrm) tool, this is a ruby script that allows us to have a pseudo shell throuth WinRM.
+In the nmap scan, I notice that ***Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)*** service was running in the ***Windows Remote Management*** port, this Windows service allows to run commands inside a server, for management purpouses, not all users have access to that, but as this is a CTF, maybe our user has! For this exploration I will use [evil-winrm](https://github.com/Hackplayers/evil-winrm) tool, this is a ruby script that allows us to have a pseudo shell through WinRM.
 
 ```
 kali@kali:~$ evil-winrm -u fsmith -p Thestrokes23 -i 10.10.10.175
