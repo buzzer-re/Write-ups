@@ -39,7 +39,7 @@ So we can create any object that implements TemplateModel interface, the Execute
 
 ![](screenshoots/createandfail.png)
 
-I was able to provoke a error, a tried to access the ***exec*** method inside the new keyword, but this was totally wrong because in Freemarker the ***dot*** operator is only for hash tables types, and also my new was wrong, because I forgotten the parenthesis ***()***, here is the correct way:
+I was able to provoke a error, I tried to access the ***exec*** method inside the new keyword, but this was totally wrong because in Freemarker the ***dot*** operator is only for hash tables types, and also my new was wrong, because I forgotten the parenthesis ***()***, here is the correct way:
 
 ![](screenshoots/correctWay.png)
 
