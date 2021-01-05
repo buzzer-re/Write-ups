@@ -126,7 +126,7 @@ Ok, let's back in time and get this powershell script:
 
 >svn up -r2
 
-This tells to svn update the current repository to the ***reversion*** 2. Now we can get the file content:
+This tells to svn update the current repository to the ***revision*** 2. Now we can get the file content:
 
 >cat deploy.ps1
 
@@ -166,13 +166,13 @@ Remember the Devops page that their moved their project ? It's actually [Azure D
 
 ![](Pictures/azure_devops.png)
 
-At first, we will be prompt for credentials, that's where the ***nathen*** creds will be used, we successfully logged in the platform, here we can look at their projects, repositories and pipelines.
+When we open the page will be prompt for credentials, that's where the ***nathen*** creds will be used, we successfully logged in the platform, here we can look at their projects, repositories and pipelines.
 
-The key it's, pipelines, pipelines do something using the repository so I just take a look and found a useful CI pipeline to deploy all the repo merge to master, into production.
+The key to solve is, pipelines, pipelines do something using the repository so I just take a look and found a useful CI pipeline to deploy all the repo merge to master, into production.
 
 ![](Pictures/alpha_ci.png)
 
-If you just hit the ***Run*** button, we will seee all the pipelines steps:
+If you just hit the ***Run*** button, we will see all the pipelines steps:
 
 * Clone the master code
 * Copy all the page to the IIS server path
