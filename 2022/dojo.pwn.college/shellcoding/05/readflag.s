@@ -61,4 +61,4 @@ stdout:
 
 
 syscall_inst_incomplete:
-        .word 0x05ffi
+        .word 0x05ff
