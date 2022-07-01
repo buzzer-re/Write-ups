@@ -1,0 +1,1 @@
+This chall is very similar to previous, but here we need to create a shellcode to escape the `chroot` jail, the classic `open+read+write in stdout` works pretty well.
