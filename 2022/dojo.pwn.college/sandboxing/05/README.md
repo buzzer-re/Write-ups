@@ -1,0 +1,1 @@
+This challenge we can solve by using the `linkat` syscall that works like the `openat` but for creating symbolic links, so we create a symbolic to inside our sandbox to ouside, then we just open the link and send to stdout using the `sendfile` syscall.
